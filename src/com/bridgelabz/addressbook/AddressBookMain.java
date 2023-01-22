@@ -1,17 +1,49 @@
 package com.bridgelabz.addressbook;
 
+import java.util.Scanner;
+
 public class AddressBookMain {
     public static void main(String[] args) {
-        System.out.println("Welcome to address book system program !");
-        AddressBook addressBook = new AddressBook();
-        System.out.println(addressBook.contacts.getFirstName());
-        System.out.println(addressBook.contacts.getLastName());
-        System.out.println(addressBook.contacts.getAddress());
-        System.out.println(addressBook.contacts.getCity());
-        System.out.println(addressBook.contacts.getState());
-        System.out.println(addressBook.contacts.getZip());
-        System.out.println(addressBook.contacts.getPhoneNumber());
-        System.out.println(addressBook.contacts.getEmail());
+        Scanner input = new Scanner(System.in);
 
+        AddressBook addressBook = new AddressBook();
+
+        System.out.println("Enter first name: ");
+        String firstName = input.nextLine();
+
+        System.out.println("Enter last name: ");
+        String lastName = input.nextLine();
+
+        System.out.println("Enter address: ");
+        String address = input.nextLine();
+
+        System.out.println("Enter city: ");
+        String city = input.nextLine();
+
+        System.out.println("Enter state: ");
+        String state = input.nextLine();
+
+        System.out.println("Enter zip code: ");
+        String zip = input.nextLine();
+
+        System.out.println("Enter phone number: ");
+        String phoneNumber = input.nextLine();
+
+        System.out.println("Enter email: ");
+        String email = input.nextLine();
+
+        Contact contact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
+
+        addressBook.addContact(contact);
+
+        System.out.println("Contact added successfully:");
+        System.out.println("Name: " + contact.getFirstName() + " " + contact.getLastName());
+        System.out.println("Address: " + contact.getAddress());
+        System.out.println("City: " + contact.getCity());
+        System.out.println("State: " + contact.getState());
+        System.out.println("Zip code: " + contact.getZip());
+        System.out.println("Phone number: " + contact.getPhoneNumber());
+        System.out.println("Email: " + contact.getEmail());
     }
 }
+
