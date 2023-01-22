@@ -29,7 +29,7 @@ public class AddressBook {
         contacts.setCity(city);
         contacts.setState(state);
         contacts.setPhoneNumber(phoneNumber);
-        contacts.setZip(zip);
+        contacts.setZip();
         contacts.setEmail(email);
 
 
@@ -56,8 +56,25 @@ public class AddressBook {
             int zip = scanner.nextInt();
             System.out.println("Enter Email : ");
             String email = scanner.next();
-            Contacts contacts =new Contacts(firstName,lastName,address,city,state,phoneNumber,zip,email);
-            this.contacts=contacts;
+            Contacts contacts = new Contacts(firstName, lastName, address, city, state, phoneNumber, zip, email);
+            this.contacts = contacts;
+        }
+    }
+
+    public void deleteContacts() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the first name of the contact you want to edit : ");
+        String searchName = scanner.next();
+        if (contacts.getFirstName().equalsIgnoreCase(searchName)) {
+            contacts.setFirstName(null);
+            contacts.setLastName(null);
+            contacts.setAddress(null);
+            contacts.setCity(null);
+            contacts.setState(null);
+            contacts.setPhoneNumber(null);
+            contacts.setZip();
+            contacts.setEmail(null);
+
         }
     }
 }

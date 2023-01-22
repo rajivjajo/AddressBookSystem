@@ -74,8 +74,10 @@ package com.bridgelabz.addressbook;
         public int getZip(){
             return zip ;
         }
-        public void setZip(int zip){
+        public void setZip(){
             this.zip = zip;
         }
 
-    }
+
+        }
+
