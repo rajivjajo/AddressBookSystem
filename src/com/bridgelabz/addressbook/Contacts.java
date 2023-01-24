@@ -1,12 +1,13 @@
 package com.bridgelabz.addressbook;
     public class Contacts {
-        private String firstName , lastName , address , city , state , email;
+        private String firstName, lastName, address, city, state, email;
         private Long phoneNumber;
         private int zip;
+
         public Contacts() {
         }
 
-        public Contacts(String firstName, String lastName, String address, String city, String state, Long phoneNumber ,int zip , String email) {
+        public Contacts(String firstName, String lastName, String address, String city, String state, Long phoneNumber, int zip, String email) {
             this.firstName = firstName;
             this.lastName = lastName;
             this.address = address;
@@ -56,6 +57,7 @@ package com.bridgelabz.addressbook;
         public void setState(String state) {
             this.state = state;
         }
+
         public String getEmail() {
             return email;
         }
@@ -71,13 +73,20 @@ package com.bridgelabz.addressbook;
         public void setPhoneNumber(Long phoneNumber) {
             this.phoneNumber = phoneNumber;
         }
-        public int getZip(){
-            return zip ;
+
+        public int getZip() {
+            return zip;
         }
-        public void setZip(){
+
+        public void setZip(int zip) {
             this.zip = zip;
         }
 
+        public String toString() {
+            return ("\nFirstName:- " + firstName + "\nLastName:- " + lastName + "\nAddress:- " + address + "\nCity:- " + city + "\nState:- " + state +
+                     "\nEmail Id:-" + email + "\nZip code:-"+zip + "\nContact Number:- " + phoneNumber);
+
 
         }
+    }
 
