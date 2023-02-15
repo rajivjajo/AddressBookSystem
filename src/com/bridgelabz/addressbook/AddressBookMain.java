@@ -5,104 +5,114 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class AddressBookMain {
+
     public static void main(String[] args) {
-        Map<String, AddressBook> addressBookHashMap = new HashMap<String, AddressBook>();
-        while(true){
-            System.out.println("1. Add Address Book");
+
+        Map<String, AddressBook> addressBookHashMap = new HashMap<>();
+
+        while (true) {
+            System.out.println("\n1. Add Address Book");
             System.out.println("2. Edit Address Book");
             System.out.println("3. Display Address Book Names");
-            System.out.println("4. Delete Address Book ");
+            System.out.println("4. Delete Address Book");
             System.out.println("5. Exit");
-            System.out.println("Enter your choice: ");
-            Scanner s = new Scanner(System.in);
-            int addressBookOption = s.nextInt();
-            switch(addressBookOption){
+            System.out.print("Enter your choice: ");
+            Scanner scanner = new Scanner(System.in);
+            int choice = scanner.nextInt();
+
+            switch (choice) {
                 case 1:
-                    Scanner sa = new Scanner(System.in);
-                    System.out.println("Enter Unique Address Book Name");
-                    String addressBookName = s.next();
-                    AddressBook addressBookSystem = new AddressBook();
-                    addressBookHashMap.put(addressBookName,addressBookSystem);
-                    System.out.println("Address Book Successfully created with the name " + addressBookName);
+                    System.out.print("Enter unique address book name: ");
+                    String addressBookName = scanner.next();
+                    if (addressBookHashMap.containsKey(addressBookName)) {
+                        System.out.println("Address book already exists!");
+                    } else {
+                        AddressBook addressBook = new AddressBook();
+                        addressBookHashMap.put(addressBookName, addressBook);
+                        System.out.println("Address book created successfully with the name " + addressBookName);
+                    }
                     break;
+
                 case 2:
-                    System.out.println("Welcome to Address Book Editing");
-                    while (true) {
-                        Scanner sade = new Scanner(System.in);
-                        System.out.println("1. Add Contact");
-                        System.out.println("2. Display Contacts");
-                        System.out.println("3. Edit Contact");
-                        System.out.println("4. Delete Contact");
-                        System.out.println("5. Exit");
-                        System.out.println("Enter your choice: ");
-                        int choice = sade.nextInt();
-                        System.out.println("Enter Address Book Name");
-                        String addressBookNamen = sade.next();
-                        try{
-                            AddressBook ab = addressBookHashMap.get(addressBookNamen);
-                            switch (choice) {
+                    System.out.print("Enter address book name: ");
+                    String bookName = scanner.next();
+                    AddressBook addressBook = addressBookHashMap.get(bookName);
+                    if (addressBook == null) {
+                        System.out.println("Address book not found!");
+                    } else {
+                        while (true) {
+                            System.out.println("\n1. Add Contact");
+                            System.out.println("2. Display Contacts");
+                            System.out.println("3. Edit Contact");
+                            System.out.println("4. Delete Contact");
+                            System.out.println("5. Exit");
+                            System.out.print("Enter your choice: ");
+                            int option = scanner.nextInt();
+
+                            switch (option) {
                                 case 1:
-                                    ab.addContacts();
+                                    addressBook.addContacts();
                                     break;
                                 case 2:
-                                    ab.displayContacts();
+                                    addressBook.displayContacts();
                                     break;
                                 case 3:
-                                    ab.editContacts();
+                                    addressBook.editContacts();
                                     break;
                                 case 4:
-                                    ab.deleteContacts();
+                                    addressBook.deleteContacts();
                                     break;
                                 case 5:
-                                    System.exit(0);
+                                    System.out.println("Exiting address book editing...");
+                                    break;
                                 default:
-                                    System.out.println("Invalid Choice");
+                                    System.out.println("Invalid choice!");
                                     break;
                             }
 
-                        }catch (NullPointerException e){
-                            System.out.println("Address Book with name " + addressBookNamen + " does not exist");
-                        }
-                    }
-                case 3:
-                    if (addressBookHashMap.size() == 0) {
-                        System.out.println("Address Book is Empty");
-                    } else {
-                        System.out.println("Address Books List");
-                        int i = 0;
-                        for (Map.Entry<String, AddressBook> entry : addressBookHashMap.entrySet()) {
-                            String k = entry.getKey();
-                            System.out.println(++i + ") " + k);
-                        }
-                    }
-                    break;
-                case 4:
-                    Scanner s4 = new Scanner(System.in);
-                    if (addressBookHashMap.size() != 0) {
-                        for (Map.Entry<String, AddressBook> entry : addressBookHashMap.entrySet()) {
-                            String k = entry.getKey();
-                            System.out.println("Address Book Name : " + k);
-                        }
-                        System.out.println("Enter Address Book name which you want Delete");
-                        String addressBookNamed = s4.next();
-                        for (Map.Entry<String, AddressBook> entry : addressBookHashMap.entrySet()) {
-                            String k = entry.getKey();
-                            if (k.equalsIgnoreCase(addressBookNamed)) {
-                                addressBookHashMap.remove(k);
-                                System.out.println("Address Book with name  " + addressBookNamed + " deleted successfully");
+                            if (option == 5) {
                                 break;
                             }
                         }
                     }
-                    else {
-                        System.out.println("No Address Book exist in the Record" );
+                    break;
+
+                case 3:
+                    if (addressBookHashMap.isEmpty()) {
+                        System.out.println("No address book found!");
+                    } else {
+                        System.out.println("\nAddress Books:");
+                        int i = 1;
+                        for (String key : addressBookHashMap.keySet()) {
+                            System.out.println(i + ". " + key);
+                            i++;
+                        }
                     }
                     break;
+
+                case 4:
+                    if (addressBookHashMap.isEmpty()) {
+                        System.out.println("No address book found!");
+                    } else {
+                        System.out.print("Enter address book name to delete: ");
+                        String bookNameToDelete = scanner.next();
+                        AddressBook bookToDelete = addressBookHashMap.get(bookNameToDelete);
+                        if (bookToDelete == null) {
+                            System.out.println("Address book not found!");
+                        } else {
+                            addressBookHashMap.remove(bookNameToDelete);
+                            System.out.println("Address book deleted successfully!");
+                        }
+                    }
+                    break;
+
                 case 5:
+                    System.out.println("Exiting address book application...");
                     System.exit(0);
                     break;
+
                 default:
-                    System.out.println("Invalid Option");
+                    System.out.println("Invalid choice!");
                     break;
             }
         }
