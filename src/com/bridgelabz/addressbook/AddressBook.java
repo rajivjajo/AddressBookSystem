@@ -95,7 +95,6 @@ public class AddressBook {
         for (Contacts contactsDetailsValue : contactList) {
             System.out.println(contactsDetailsValue);
             System.out.println("________________________________________________");
-
         }
     }
 }
